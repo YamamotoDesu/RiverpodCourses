@@ -65,7 +65,7 @@ class HomePage extends ConsumerWidget {
 <img width="300" alt="スクリーンショット 2023-04-13 9 58 49" src="https://user-images.githubusercontent.com/47273077/231618531-30ad0872-ea26-474b-9e2b-fe5e37467ff8.gif">
 
 ```dart
-mport 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 void main() {

@@ -1,6 +1,62 @@
 # RiverpodCourses
 https://www.youtube.com/watch?v=vtGCteFYs4M
 
+# Provider
+Provider はプロバイダの中で最もベーシックなプロバイダであり、値を同期的に生成してくれます。
+
+一般的には次のような用途で使われます。
+
+* 計算結果をキャッシュするため。
+* 他のプロバイダに値（例えば Repository や HttpClient のインスタンス）を公開するため。
+* テスト実施時やウィジェット構築時に値をオーバーライドするため。
+* select を使わずにプロバイダやウィジェットの更新の条件を限定するため。
+
+# StateNotifierProvider
+StateNotifierProvider は StateNotifier（Riverpod が依存する state_notifier パッケージのクラス）を監視し、公開するためのプロバイダです。 この StateNotifierProvider および StateNotifier は、ユーザ操作などにより変化するステート（状態）を管理するソリューションとして Riverpod が推奨するものです。
+
+一般的には次のような用途で使われます。
+
+* 「イミュータブル（不変）」 なステートを公開するため（イミュータブルではあるが、イベントに応じて変わることがある）。
+* ステートを変更するためのロジック（いわゆるビジネスロジック）を一つの場所で集中管理して保守性を高めるため。
+
+# FutureProvider
+FutureProvider は非同期操作が可能な Provider であると言えます。
+
+一般的には次のような用途で使われます。
+
+* 非同期操作を実行し、その結果をキャッシュするため（例えばネットワークリクエストなど）。
+* 非同期操作の error/loading ステートを適切に処理するため。
+* 非同期的に取得した複数の値を組み合わせて一つの値にするため。
+
+# StreamProvider
+一般的には次のような用途で使われます。
+
+* Firebase や WebSocket の監視するため。
+* 一定時間ごとに別のプロバイダを更新するため。
+
+# StateProvider
+StateProvider は外部から変更が可能なステート（状態）を公開するプロバイダです。 StateNotifierProvider の簡易版であり、ステートの管理にわざわざ StateNotifier クラスを定義するほどではない場合にご利用いただけます。
+
+そのため、StateProvider は UI 側で利用される シンプルなステート を管理するのにうってつけでしょう。 シンプルなステートとは、次のような型のステートのことを指します。
+
+* 列挙型（enum）、例えばフィルタの種類など
+* 文字列型、例えばテキストフィールドの入力内容など
+* bool 型、例えばチェックボックスの値など
+* 数値型、例えばページネーションのページ数やフォームの年齢など
+逆に言えば、StateProvider は次のようなステートを公開するために使うべきではありません。
+
+* ステートの算出に何かしらのバリデーション（検証）ロジックが必要
+* ステート自体が複雑なオブジェクトである（カスタムのクラスや List/Map など）
+* ステートを変更するためのロジックが単純な count++ よりは高度である必要がある
+
+# ChangeNotifierProvider
+ChangeNotifierProvider （flutter_riverpod/hooks_riverpod のみ）は ChangeNotifier を Flutter で利用するためのプロバイダです。
+
+Riverpod では使用を非推奨としており、主に次の理由により存在しています。
+
+* package:provider で ChangeNotifierProvider を利用していた場合の移行作業を容易にするため
+* ミュータブル（可変）なステート管理手法をサポートするため
+
 ## Example 1
 
 ```dart
